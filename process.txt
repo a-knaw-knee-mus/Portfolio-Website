@@ -1,0 +1,37 @@
+Day 1
+-Setup/plan/design
+-Learn the basics (Routes, React Boostrap)
+-Begin the Navbar
+
+Day 2
+-Setup basis of the pages
+-Implement web context (adminSignin/signout and save projects)
+-Setup/Read from database
+-Implement 'add project' from the admin
+-Create cards to display projects in database
+
+Day 3 
+-Fixed possible data leak by verifying pswd on server
+-Fixed 'unique key' problem by retrieving projects after adding a project and using projects._id
+-Got Cloudinary to work (both making the api request and saving new image to mongoDB)
+-Able to display images on frontend immedietly after adding project (no restart needed)
+-Add delete button for each project
+
+Day 4
+-Make project cards more organize & aesthetically pleasing
+-Change description input to multi-line with line break preservation
+-Added optional demo link when adding project
+-Added edit button by reusing project modal
+-Add fade-in, shadows and highlight page button when on that page
+-Finish up projects page
+
+Day 5
+-Made Contacts page with emailjs which includes social card (reuse in home page) 
+-Added resume and socials to home page
+-Made home page modular (edit pfp, description, resume)
+-Formatted home page 
+-Reformat/clean-up code
+
+Day 6
+-Deploy
+-Populate website with data
