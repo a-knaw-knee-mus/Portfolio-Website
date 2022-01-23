@@ -9,6 +9,7 @@
 - React bootstrap, emailjs, react router, axios, cors, mongoose
 
 ## Future Improvements
+- Refactor context variables (projects and home content dont need to be in context)
 - Add drag and drop to the projects page for easy reordering
 - Improve aesthetics
 
