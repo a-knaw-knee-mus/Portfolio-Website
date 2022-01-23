@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Form, Modal, Button } from "react-bootstrap"
 import axios from 'axios'
-import { useHomeContent, useUpdateHomeContent } from "../context/Context"
+import { useBackendUrl, useHomeContent, useUpdateHomeContent } from "../context/Context"
 
 export default function HomeModal({
     show, 
@@ -11,6 +11,7 @@ export default function HomeModal({
     const resumeRef = useRef()
     const [pfpSelected, setPfpSelected] = useState("")
 
+    const backendUrl = useBackendUrl()
     const homeContent = useHomeContent()
     const setHomeContent = useUpdateHomeContent()
     const introPlaceholder = homeContent.intro
@@ -44,7 +45,7 @@ export default function HomeModal({
             apiKey: process.env.REACT_APP_API_KEY
         }
 
-        await axios.post('https://mma-website-backend.herokuapp.com/edithomecontent', projectJSON)
+        await axios.post(`${backendUrl}/edithomecontent`, projectJSON)
         await setHomeContent()
         handleClose()
     }
