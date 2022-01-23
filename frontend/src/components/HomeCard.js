@@ -4,10 +4,10 @@ import { Card } from 'react-bootstrap'
 import HomeCSS from './css/HomeCard.module.css'
 
 export default function HomeCard() {
-    const homeContent = useHomeContent()
+    const {homeContent} = useHomeContent()
 
     return <Card id={HomeCSS.cardContainer}>
-        <img className={HomeCSS.pfp} src={homeContent.profilePic} alt="profile"/>
+        <img className={HomeCSS.pfp} src={homeContent.profilePic} alt="please wait a few seconds"/>
         <div className={HomeCSS.description}>
             <p style={{fontFamily: "Lato, sans-serif", fontWeight: "400"}}>{homeContent.intro}</p>
         </div>

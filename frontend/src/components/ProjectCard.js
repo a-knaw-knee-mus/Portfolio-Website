@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Card, Button } from "react-bootstrap"
 import axios from 'axios'
-import { useBackendUrl, useSetProjects, useAdmin } from './context/Context'
+import { useProjects, useAdmin, useBackendUrl } from './context/Context'
 import CardCSS from './css/ProjectCard.module.css'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import LinkIcon from '@mui/icons-material/Link'
@@ -16,14 +16,14 @@ export default function ProjectCard({
     image
 }) {
     const backendUrl = useBackendUrl()
-    const setProjects = useSetProjects()
-    const isAdmin = useAdmin()
+    const {updateProjects} = useProjects()
+    const {isAdmin} = useAdmin()
     const [showProjectModal, setShowProjectModal] = useState(false)
 
     const deleteProject = async () => {
         if(window.confirm('Are you sure you want to delete this project?')) {
             await axios.post(`${backendUrl}/deleteproject`, {id: id, apiKey: process.env.REACT_APP_API_KEY})
-            await setProjects()
+            await updateProjects()
         }
     }
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useSetPage } from "./context/Context"
+import { usePage } from "./context/Context"
 import { Card, Form, Button } from "react-bootstrap"
 import emailjs from 'emailjs-com'
 import Socials from "./Socials"
@@ -19,7 +19,7 @@ const contactStyle = {
 }
 
 export default function Contact() {
-    const setPage = useSetPage()
+    const {setPage} = usePage()
 
     useEffect(() => setPage("contact"))
 

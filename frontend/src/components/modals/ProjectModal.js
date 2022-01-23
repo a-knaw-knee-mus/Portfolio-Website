@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Form, Modal, Button } from "react-bootstrap"
 import axios from 'axios'
-import { useBackendUrl, useSetProjects } from "../context/Context"
+import { useBackendUrl, useProjects } from "../context/Context"
 
 export default function ProjectModal({
     show, 
@@ -19,7 +19,7 @@ export default function ProjectModal({
     const linkRef = useRef()
     const demoRef = useRef()
     const backendUrl = useBackendUrl()
-    const setProjects = useSetProjects()
+    const {updateProjects} = useProjects()
 
     const [imageSelected, setSelectedImage] = useState("")
 
@@ -50,7 +50,7 @@ export default function ProjectModal({
         edit ? await axios.post(`${backendUrl}/editproject`, projectJSON)
              : await axios.post(`${backendUrl}/addproject`, projectJSON)
         
-        await setProjects()
+        await updateProjects()
         handleClose()
     }
 
@@ -94,4 +94,3 @@ export default function ProjectModal({
         </Modal>
     )
 }
-

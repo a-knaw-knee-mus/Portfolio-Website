@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Stack, Button, ButtonGroup } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import { useAdmin, useAdminToggle, usePage } from "./context/Context"
+import { useAdmin, usePage } from "./context/Context"
 import AdminModal from './modals/AdminModal'
 import ProjectModal from './modals/ProjectModal'
 import HomeModal from './modals/HomeModal'
@@ -15,9 +15,8 @@ export default function Header() {
     const [showAdminModal, setShowAdminModal] = useState(false)
     const [showHomeModal, setShowHomeModal] = useState(false)
     const [showProjectModal, setShowProjectModal] = useState(false)
-    const isAdmin = useAdmin()
-    const adminToggle = useAdminToggle()
-    const page = usePage()
+    const {isAdmin,adminToggle} = useAdmin()
+    const {page} = usePage()
 
     return (
         <>

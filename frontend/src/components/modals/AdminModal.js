@@ -1,10 +1,10 @@
 import React, { useRef } from 'react'
 import { Form, Modal, Button } from "react-bootstrap"
-import { useAdminToggle } from '../context/Context'
+import { useAdmin } from '../context/Context'
 
 export default function AdminModal({show, handleClose}) {
     const pswdRef = useRef()
-    const adminToggle = useAdminToggle()
+    const {adminToggle} = useAdmin()
 
     function handleSubmit(e){
         e.preventDefault()

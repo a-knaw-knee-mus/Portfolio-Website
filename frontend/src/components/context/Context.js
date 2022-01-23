@@ -3,13 +3,9 @@ import axios from 'axios'
 
 const BackendContext = React.createContext()
 const AdminContext = React.createContext()
-const AdminContextToggle = React.createContext()
 const ProjectsContext = React.createContext()
-const UpdateProjectsContext = React.createContext()
 const PageContext = React.createContext()
-const UpdatePageContext = React.createContext()
 const HomeContext = React.createContext()
-const UpdateHomeContext = React.createContext()
 
 export function useBackendUrl() {
     return useContext(BackendContext)
@@ -19,32 +15,16 @@ export function useAdmin() {
     return useContext(AdminContext)
 }
 
-export function useAdminToggle() {
-    return useContext(AdminContextToggle)
-}
-
 export function useProjects() {
     return useContext(ProjectsContext)
-}
-
-export function useSetProjects() {
-    return useContext(UpdateProjectsContext)
 }
 
 export function usePage() {
     return useContext(PageContext)
 }
 
-export function useSetPage() {
-    return useContext(UpdatePageContext)
-}
-
 export function useHomeContent() {
     return useContext(HomeContext)
-}
-
-export function useUpdateHomeContent() {
-    return useContext(UpdateHomeContext)
 }
 
 export function Context({children}) {
@@ -79,22 +59,14 @@ export function Context({children}) {
 
     return (
         <BackendContext.Provider value={backendUrl}>
-            <AdminContext.Provider value={isAdmin}>
-                <AdminContextToggle.Provider value={adminToggle}>
-                    <ProjectsContext.Provider value={projects}>
-                        <UpdateProjectsContext.Provider value={updateProjects}>
-                            <PageContext.Provider value={page}>
-                                <UpdatePageContext.Provider value={setPage}>
-                                    <HomeContext.Provider value={homeContent}>
-                                        <UpdateHomeContext.Provider value={updateHomeContent}>
-                                            {children}
-                                        </UpdateHomeContext.Provider>
-                                    </HomeContext.Provider>
-                                </UpdatePageContext.Provider>
-                            </PageContext.Provider>
-                        </UpdateProjectsContext.Provider>
-                    </ProjectsContext.Provider>
-                </AdminContextToggle.Provider>
+            <AdminContext.Provider value={{isAdmin, adminToggle}}>
+                <ProjectsContext.Provider value={{projects, updateProjects}}>
+                    <PageContext.Provider value={{page, setPage}}>
+                        <HomeContext.Provider value={{homeContent, updateHomeContent}}>
+                            {children}
+                        </HomeContext.Provider>
+                    </PageContext.Provider>
+                </ProjectsContext.Provider>
             </AdminContext.Provider>
         </BackendContext.Provider>
     )
