@@ -1,25 +1,20 @@
 import Container from "react-bootstrap/Container"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Contact from "./components/Contact"
 import Header from "./components/Header"
 import Home from "./components/Home"
 import Projects from "./components/Projects"
-import { Context } from "./components/context/Context"
+import { useState } from "react"
 
 function App() {
+  const [page, setPage] = useState("home")
+
   return (
-    <Context>
       <Container className="mt-4">
-        <Router>
-          <Header />
-          <Routes>
-            <Route exact path="/" element={<Home/>}/>
-            <Route path="/projects" element={<Projects/>}/>
-            <Route path="/contact" element={<Contact/>}/>
-          </Routes>
-        </Router>
+          <Header page={page} setPage={setPage} />
+          {page === "home" && <Home />}
+          {page === "projects" && <Projects />}
+          {page === "contact" && <Contact />}
       </Container>
-    </Context>
   )
 }
 

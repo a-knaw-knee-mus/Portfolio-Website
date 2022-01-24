@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { usePage } from "./context/Context"
+import React from 'react'
 import { Card, Form, Button } from "react-bootstrap"
 import emailjs from 'emailjs-com'
 import Socials from "./Socials"
@@ -19,10 +18,6 @@ const contactStyle = {
 }
 
 export default function Contact() {
-    const {setPage} = usePage()
-
-    useEffect(() => setPage("contact"))
-
     function sendEmail(e) {
         e.preventDefault()
         emailjs.sendForm('service_kacxihj', 'template_a2edhn9', e.target, process.env.REACT_APP_EMAILJS_USERID)

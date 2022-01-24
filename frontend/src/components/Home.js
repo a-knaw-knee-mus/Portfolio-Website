@@ -1,24 +1,40 @@
-import React, { useEffect } from 'react'
-import { usePage, useHomeContent } from './context/Context'
+import React, { useEffect, useState } from 'react'
+import { useBackendUrl } from './context/Context'
 import Socials from './Socials'
 import FadeIn from "react-fade-in"
 import HomeCard from './HomeCard'
 import HomeCSS from './css/HomeCard.module.css'
-import { Spinner } from "react-bootstrap"
+import Loading from "./Loading"
+import axios from 'axios'
 
 export default function Home() {
-    const {setPage} = usePage()
-    const {homeContent} = useHomeContent()
+    const backendUrl = useBackendUrl()
+    const [homeContent, setHomeContent] = useState()
+    const [loading, setLoading] = useState(false)
 
-    useEffect(() => setPage("home"))
+    const onStart = async () => {
+        await axios.get(`${backendUrl}/gethomecontent`).then(res => {
+            setHomeContent(res.data)
+        })
+        setLoading(true)
+    }
+
+    useEffect(() => {
+        onStart()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <FadeIn delay={150} transitionDuration={700}>
-            <HomeCard />
-            <Socials />
-            <div className={HomeCSS.pdfDiv}>
-                <iframe id={HomeCSS.pdf} src={homeContent.resume} type="application/pdf" title="pdf"/>                           
-            </div>
+            {loading ? (
+                <FadeIn delay={150} transitionDuration={700}>
+                    <HomeCard pfp={homeContent.profilePic} description={homeContent.intro} />
+                    <Socials />
+                    <div className={HomeCSS.pdfDiv}>
+                        <iframe id={HomeCSS.pdf} src={homeContent.resume} type="application/pdf" title="pdf"/>                           
+                    </div>
+                </FadeIn>
+            ) : <Loading />}
         </FadeIn>
     )
 }

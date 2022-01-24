@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Form, Modal, Button } from "react-bootstrap"
 import axios from 'axios'
-import { useBackendUrl, useHomeContent } from "../context/Context"
+import { useBackendUrl } from "../context/Context"
 
 export default function HomeModal({
     show, 
@@ -12,7 +12,11 @@ export default function HomeModal({
     const [pfpSelected, setPfpSelected] = useState("")
 
     const backendUrl = useBackendUrl()
-    const {homeContent, updateHomeContent} = useHomeContent()
+    const [homeContent, setHomeContent] = useState(async () => {
+        await axios.get(`${backendUrl}/gethomecontent`).then(res => {
+            setHomeContent(res.data)
+        })
+    })
     const introPlaceholder = homeContent.intro
     const resumePlaceholder= homeContent.resume
     const homeId = homeContent._id
@@ -45,7 +49,6 @@ export default function HomeModal({
         }
 
         await axios.post(`${backendUrl}/edithomecontent`, projectJSON)
-        await updateHomeContent()
         handleClose()
     }
 
