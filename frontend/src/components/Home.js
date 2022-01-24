@@ -14,21 +14,11 @@ export default function Home() {
 
     return (
         <FadeIn delay={150} transitionDuration={700}>
-            {homeContent != null ? (
-                <>
-                <HomeCard />
-                <Socials />
-                <div className={HomeCSS.pdfDiv}>
-                    <iframe id={HomeCSS.pdf} src={homeContent.resume} type="application/pdf" title="pdf"/>                           
-                </div>
-                </>
-            ) : (
-                <div className='mt-4' style={{textAlign: "center"}}>
-                    <p>Please wait a few seconds while we retrieve the data</p>
-                    <Spinner animation="border"/>
-                </div>
-            )}
-            
+            <HomeCard />
+            <Socials />
+            <div className={HomeCSS.pdfDiv}>
+                <iframe id={HomeCSS.pdf} src={homeContent.resume} type="application/pdf" title="pdf"/>                           
+            </div>
         </FadeIn>
     )
 }
