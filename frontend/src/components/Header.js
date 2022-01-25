@@ -30,16 +30,19 @@ export default function Header({page, setPage}) {
                 </>}
         </Stack>
 
-        {isAdmin ? 
+        {isAdmin && 
+            <>
             <HomeModal 
                 show={showHomeModal}
                 handleClose={() => setShowHomeModal(false)}
             />
-        :
+
             <ProjectModal
                 show={showProjectModal}
                 handleClose={() => setShowProjectModal(false)}
-            />}
+            />
+            </>
+        }
         
         <AdminModal
             show={showAdminModal}
