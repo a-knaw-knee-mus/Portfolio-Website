@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useAdmin, useBackendUrl } from './context/Context'
 import CardCSS from './css/ProjectCard.module.css'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import LinkIcon from '@mui/icons-material/Link'
+import YouTubeIcon from '@mui/icons-material/YouTube';
 import ProjectModal from './modals/ProjectModal'
 
 export default function ProjectCard({
@@ -31,14 +31,14 @@ export default function ProjectCard({
             <div className={CardCSS.name}>
                 {title}
             </div>
+            <div className={CardCSS.link}><a rel="noreferrer" target="_blank" href={gitLink}><GitHubIcon sx={{color: "#14191e"}} fontSize="large" /></a></div>
+            <div className={CardCSS.image} ><img className={CardCSS.picture} src={image} alt="project thumbnail"/></div>
             <div className={CardCSS.description}>
                 {description}
             </div>
             {demoLink !== "" &&
-                <div className={CardCSS.demo}><em>Demonstration: </em><a rel="noreferrer" target="_blank" href={demoLink}><LinkIcon sx={{color: "#14191e"}} fontSize="large"/></a></div>
+                <div className={CardCSS.demo}><em>Demonstration: </em><a rel="noreferrer" target="_blank" href={demoLink}><YouTubeIcon sx={{color: "#14191e"}} fontSize="large"/></a></div>
             }
-            <div className={CardCSS.link}><a rel="noreferrer" target="_blank" href={gitLink}><GitHubIcon sx={{color: "#14191e"}} fontSize="large" /></a></div>
-            <div className={CardCSS.image} ><img className={CardCSS.picture} src={image} alt="project thumbnail"/></div>
             {isAdmin && <>
                 <Button className={CardCSS.editButton} onClick={() => setShowProjectModal(true)} variant="success">Edit</Button> 
                 <Button className={CardCSS.deleteButton} onClick={() => deleteProject()} variant="danger">Delete</Button>

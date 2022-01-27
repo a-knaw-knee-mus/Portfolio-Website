@@ -8,16 +8,14 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.pfp {
+    width: 100%;
+    align-self: center;
+}
+
 .description {
     white-space: pre-wrap;
     font-size: 1.25rem;
-    grid-column: 2 / 3;
-}
-
-.pfp {
-    grid-column: 1 / 2;
-    width: 100%;
-    align-self: center;
 }
 
 .pdfDiv {
@@ -30,4 +28,28 @@
     width: 610px;
     height: 770px;
     border-radius: 5px;
+}
+
+@media screen and (max-width: 991px) {
+    #cardContainer {
+        display: block;
+        margin: 3% 0;
+        text-align: center;
+    }
+
+    .pfp {
+        width: 27%;
+    }
+
+    .description {
+        font-size: 1rem;
+        margin-top: 3%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #pdf {
+        width: 100%;
+        height: 600px;
+    }
 }

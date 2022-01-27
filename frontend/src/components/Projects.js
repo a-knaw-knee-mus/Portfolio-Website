@@ -5,11 +5,13 @@ import FadeIn from "react-fade-in"
 import { Container } from "react-bootstrap"
 import Loading from "./Loading"
 import axios from 'axios'
+import { useMediaQuery } from 'react-responsive'
 
 export default function Projects() {
     const backendUrl = useBackendUrl()
     const [projects, setProjects] = useState()
     const [loading, setLoading] = useState(false)
+    const smallScreen = useMediaQuery({ query: '(max-width: 991px)' })
 
     const onStart = async () => {
         await axios.get(`${backendUrl}/getprojects`).then(res => {
@@ -28,7 +30,7 @@ export default function Projects() {
             {loading ? (
                 <FadeIn delay={150} transitionDuration={700}>
                     <Container style={{margin: "2% 0"}}>
-                        <p style={{textAlign: "center", fontSize: "1.5rem", fontFamily: "Lato, sans-serif"}}>
+                        <p style={{textAlign: "center", fontSize: !smallScreen ? "1.5rem" : "1rem", fontFamily: "Lato, sans-serif"}}>
                             <em>Below are all of my significant projects, the link to find them and a demonstration if needed.
                             <br/>If you're admin (which is me) you can add, edit and delete these projects!</em>
                         </p>

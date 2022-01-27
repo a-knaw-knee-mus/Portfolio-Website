@@ -10,8 +10,9 @@
 
 ## Future Improvements
 - ~~Refactor context variables (projects and home content dont need to be in context) *Switched to single-page design*~~
-- Add drag and drop to the projects page for easy reordering
+- Add Media Queries for improved visability on mobile
 - Improve aesthetics
+- Add drag and drop to the projects page for easy reordering
 
 ## Check it Out! => https://muhammadmehdi-ali.netlify.app/
 
