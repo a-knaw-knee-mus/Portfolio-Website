@@ -1,63 +1,89 @@
-import React, { useState } from 'react'
-import { Card, Button } from "react-bootstrap"
-import axios from 'axios'
-import { useAdmin, useBackendUrl } from './context/Context'
-import CardCSS from './css/ProjectCard.module.css'
-import GitHubIcon from '@mui/icons-material/GitHub'
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import ProjectModal from './modals/ProjectModal'
+import React, { useState } from "react";
+import { Card, Button } from "react-bootstrap";
+import axios from "axios";
+import { useAdmin, useBackendUrl } from "./context/Context";
+import CardCSS from "./css/ProjectCard.module.css";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import ProjectModal from "./modals/ProjectModal";
 
 export default function ProjectCard({
-    id,
-    title,
-    description,
-    gitLink,
-    demoLink,
-    image
+  id,
+  title,
+  description,
+  gitLink,
+  demoLink,
+  image,
 }) {
-    const backendUrl = useBackendUrl()
-    const {isAdmin} = useAdmin()
-    const [showProjectModal, setShowProjectModal] = useState(false)
+  const backendUrl = useBackendUrl();
+  const { isAdmin } = useAdmin();
+  const [showProjectModal, setShowProjectModal] = useState(false);
 
-    const deleteProject = async () => {
-        if(window.confirm('Are you sure you want to delete this project?')) {
-            await axios.post(`${backendUrl}/deleteproject`, {id: id, apiKey: process.env.REACT_APP_API_KEY})
-        }
+  const deleteProject = async () => {
+    if (window.confirm("Are you sure you want to delete this project?")) {
+      await axios.post(`${backendUrl}/deleteproject`, {
+        id: id,
+        apiKey: process.env.REACT_APP_API_KEY,
+      });
     }
+  };
 
-    return (
-        <>
-        <Card id={CardCSS.gridContainer}>
-            <div className={CardCSS.name}>
-                {title}
-            </div>
-            <div className={CardCSS.link}><a rel="noreferrer" target="_blank" href={gitLink}><GitHubIcon sx={{color: "#14191e"}} fontSize="large" /></a></div>
-            <div className={CardCSS.image} ><img className={CardCSS.picture} src={image} alt="project thumbnail"/></div>
-            <div className={CardCSS.description}>
-                {description}
-            </div>
-            {demoLink !== "" &&
-                <div className={CardCSS.demo}><em>Demonstration: </em><a rel="noreferrer" target="_blank" href={demoLink}><YouTubeIcon sx={{color: "#14191e"}} fontSize="large"/></a></div>
-            }
-            {isAdmin && <>
-                <Button className={CardCSS.editButton} onClick={() => setShowProjectModal(true)} variant="success">Edit</Button> 
-                <Button className={CardCSS.deleteButton} onClick={() => deleteProject()} variant="danger">Delete</Button>
-                </>
-            }
-        </Card>
+  return (
+    <>
+      <Card id={CardCSS.gridContainer}>
+        <div className={CardCSS.name}>{title}</div>
+        <div className={CardCSS.link}>
+          <a rel="noreferrer" target="_blank" href={gitLink}>
+            <GitHubIcon sx={{ color: "#14191e" }} fontSize="large" />
+          </a>
+        </div>
+        <div className={CardCSS.image}>
+          <img
+            className={CardCSS.picture}
+            src={image}
+            alt="project thumbnail"
+          />
+        </div>
+        <div className={CardCSS.description}>{description}</div>
+        {demoLink !== "" && (
+          <div className={CardCSS.demo}>
+            <em>Demonstration: </em>
+            <a rel="noreferrer" target="_blank" href={demoLink}>
+              <YouTubeIcon sx={{ color: "#14191e" }} fontSize="large" />
+            </a>
+          </div>
+        )}
+        {isAdmin && (
+          <>
+            <Button
+              className={CardCSS.editButton}
+              onClick={() => setShowProjectModal(true)}
+              variant="success"
+            >
+              Edit
+            </Button>
+            <Button
+              className={CardCSS.deleteButton}
+              onClick={() => deleteProject()}
+              variant="danger"
+            >
+              Delete
+            </Button>
+          </>
+        )}
+      </Card>
 
-        <ProjectModal 
-            show={showProjectModal} 
-            handleClose={() => setShowProjectModal(false)} 
-            id={id} 
-            titlePlaceholder={title} 
-            descPlaceholder={description} 
-            demoPlaceholder={demoLink} 
-            linkPlaceholder={gitLink} 
-            imagePlaceholder={image}
-            edit={true}
-        />
-        </>
-        
-    )
+      <ProjectModal
+        show={showProjectModal}
+        handleClose={() => setShowProjectModal(false)}
+        id={id}
+        titlePlaceholder={title}
+        descPlaceholder={description}
+        demoPlaceholder={demoLink}
+        linkPlaceholder={gitLink}
+        imagePlaceholder={image}
+        edit={true}
+      />
+    </>
+  );
 }
