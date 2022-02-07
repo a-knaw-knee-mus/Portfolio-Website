@@ -35,13 +35,16 @@ function auth(req, res, next) {
 }
 
 app.get("/gethomecontent", (req, res) => {
-    Home.find({}, (err, docs) => {
-        if(!err) {
+    const getHomeContent = async () => {
+        try {
+            const docs = await Home.find({}).lean()
             res.send(docs[0])
-        } else {
-            throw err
+        } catch(err) {
+            console.log(err)
+            res.send(400)
         }
-    })
+    }
+    getHomeContent()
 })
 
 app.post("/edithomecontent", auth, async (req, res) => {
@@ -92,6 +95,35 @@ app.get("/getprojects", (req, res) => {
             throw err
         }
     })
+})
+
+app.post("/switchprojects", auth, async (req, res) => {
+    const firstId = req.body.firstId
+    const secondId = req.body.secondId
+
+    const item1 = await Project.findOne({_id: firstId}).lean()
+    const item2 = await Project.findOne({_id: secondId}).lean()
+    
+    const editProject1 = {
+        title: item1.title,
+        description: item1.description,
+        link: item1.link,
+        image: item1.image,
+        demo: item1.demo
+    }
+
+    const editProject2 = {
+        title: item2.title,
+        description: item2.description,
+        link: item2.link,
+        image: item2.image,
+        demo: item2.demo
+    }
+
+    await Project.findOneAndUpdate({_id: firstId}, editProject2, {returnOriginal: false})
+    await Project.findOneAndUpdate({_id: secondId}, editProject1, {returnOriginal: false})
+
+    res.sendStatus(200)
 })
 
 app.get("/", (req, res) => {

@@ -25,9 +25,9 @@ export default function Home() {
   }, []);
 
   return (
-    <FadeIn delay={150} transitionDuration={700}>
+    <>
       {loading ? (
-        <FadeIn delay={150} transitionDuration={700}>
+        <FadeIn delay={150} transitionDuration={500}>
           <HomeCard
             pfp={homeContent.profilePic}
             description={homeContent.intro}
@@ -43,8 +43,10 @@ export default function Home() {
           </div>
         </FadeIn>
       ) : (
-        <Loading />
+        <FadeIn delay={150} transitionDuration={500}>
+          <Loading />
+        </FadeIn>
       )}
-    </FadeIn>
+    </>
   );
 }
