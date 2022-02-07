@@ -10,9 +10,10 @@
 
 ## Future Changes
 - Improve aesthetics
-- Add drag and drop to the projects page for easy reordering
 
 ## Completed Changes
+- Add drag and drop to the projects page for easy reordering
+- Add Loading icon when making API requests
 - Improve responsiveness on mobile (used media queries and react-responsive)
 - Refactor context variables (projects and home content dont need to be in context) *Switched to single-page design*
 
