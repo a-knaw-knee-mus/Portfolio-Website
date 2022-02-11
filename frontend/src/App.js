@@ -9,6 +9,7 @@ function App() {
   const [page, setPage] = useState("home")
 
   return (
+      // single page design
       <Container className="mt-4">
           <Header page={page} setPage={setPage} />
           {page === "home" && <Home />}
